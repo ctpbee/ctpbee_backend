@@ -38,7 +38,7 @@ pip install -r requriment.txt
 ## API
 > Response格式规范:  `{'success' : True(bool), 'msg' :  msg(str), 'data' : data(Any)}`
 如未明确给出，请以具体的msg，data为准
-#### /login
+### /login
 key|value|remarks
 ---|---|---
 method|POST
@@ -56,7 +56,7 @@ response|
 success| `{"success":True,"msg":"","data":token}`
 fail| `{"success":False,"msg":msg,"data":""}`
       
-#### /logout
+### /logout
 key|value|remarks
 ---|---|---
 method|POST
@@ -67,7 +67,7 @@ success| `{"success":True,"msg":msg,"data":""}`
 fail| `{"success":False,"msg":msg,"data":""}`
 
 
-#### /market
+### /market
 key|value|remarks
 ---|---|---
 method|POST
@@ -83,7 +83,7 @@ response|
 success| `{"success":True,"msg":"更新合约列表完成","data":""}`| 最新合约列表通过socket推送 on("contract")
 fail| `{"success":False,"msg":"更新合约失败","data":""}`
 
-#### /order_solve
+### /order_solve
 key|value|remarks
 ---|---|---
 method|GET
@@ -104,7 +104,7 @@ response|
 success| `{"success":True,"msg":"成功下单","data":""}`
 fail| `{"success":False,"msg":msg,"data":""}`
 
-#### /auth_code
+### /auth_code
 key|value|remarks
 ---|---|---
 method|POST
@@ -115,7 +115,7 @@ response|
 success| `{"success":True,"msg":"修改成功","data":""}`
 fail| `{"success":False,"msg":"修改失败","data":""}`
 
-#### /strategy
+### /strategy
 key|value|remarks
 ---|---|---
 method|GET
@@ -138,7 +138,7 @@ response|
 success| `{"success":True,"msg":"删除××成功","data":""}`
 fail| `{"success":False,"msg":"删除××失败","data":""}`
 
-#### /check_code
+### /check_code
 key|value|remarks
 ---|---|---
 method|POST
@@ -147,7 +147,7 @@ args|
 response|
 success| `{"success":True,"msg":"","data":data}`
 
-#### /run_code
+### /run_code
 key|value|remarks
 ---|---|---
 method|POST
@@ -156,7 +156,7 @@ args|
 response|
 success| `{"success":True,"msg":"","data":data}`
 
-#### /code
+### /code
 key|value|remarks
 ---|---|---
 method|GET
@@ -173,7 +173,7 @@ response|
 success| `{"success":True,"msg":"添加成功","data":""}`|同时对策略进行ext变量检测
 fail|`{"success":True,"msg":"添加失败","data":""}`
 
-#### /close_position
+### /close_position
 key|value|remarks
 ---|---|---
 method|POST
@@ -187,7 +187,7 @@ response|
 success| `{"success":True,"msg":msg,"data":""}`
 fail| `{"success":False,"msg":msg,"data":""}`
 
-#### /bar
+### /bar
 key|value|remarks
 ---|---|---
 method|POST
@@ -198,13 +198,13 @@ success| `{"success":True,"msg":"","data":data}`|data->`[[timestamp,open_price,h
 fail| `{"success":False,"msg":msg,"data":""}`|
 
 
-#### /config
+### /config
 key|value|remarks
 ---|---|---
 method|GET
 args|-
 response|
-success| `{"success":True,"msg":"","data":data}`|data->`{key:value}`
+success| `{"success":True,"msg":"","data":data}`|data->`{key:value,key:value}`
 /|/|/
 method|PUT
 args|
@@ -217,7 +217,7 @@ args|
 -|CLOSE_PATTERN
 -|SHARED_FUNC
 response|
-success|`{"success":True,"修改成功":"","data":data}`
+success|`{"success":True,"修改成功":"","data":""}`
 
 ## 代码概览     
 基于ctpbee API支持
