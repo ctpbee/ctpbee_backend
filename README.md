@@ -9,6 +9,8 @@ pip install -r requriment.txt
 - [功能支持](#功能支持)
 - [API](#API)
 - [代码概览](#代码概览)
+- [快速部署](#~~快速部署~~ (现仅支持单账户)python run.py 即可)
+- [写在最后](#写在最后)
 
 
 
