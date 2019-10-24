@@ -26,7 +26,7 @@ pip install -r requriment.txt
 
 
 
-## 功能支持___[[目录]](#目录)
+## 功能支持
  - [x] 单账户
  - [x] 行情
  - [x] K线图
@@ -35,12 +35,14 @@ pip install -r requriment.txt
  - [ ] 回测
  ---
 
-## API___[[目录]](#目录)
+## API
 > Response格式规范:  `{'success' : True(bool), 'msg' :  msg(str), 'data' : data(Any)}`
 如未明确给出，请以具体的msg，data为准
 
 <span id="login"></span>
-### /login___[[目录]](#目录)
+### /login
+[[回到目录]](#目录)
+
 key|value|remarks
 ---|---|---
 method|POST
@@ -59,7 +61,9 @@ success| `{"success":True,"msg":"","data":token}`
 fail| `{"success":False,"msg":msg,"data":""}`
      
 <span id="logout"></span>
-### /logout___[[目录]](#目录)
+### /logout
+[[回到目录]](#目录)
+
 key|value|remarks
 ---|---|---
 method|POST
@@ -70,7 +74,9 @@ success| `{"success":True,"msg":msg,"data":""}`
 fail| `{"success":False,"msg":msg,"data":""}`
 
 <span id="market"></span>
-### /market___[[目录]](#目录)
+### /market
+[[回到目录]](#目录)
+
 key|value|remarks
 ---|---|---
 method|POST
@@ -87,7 +93,9 @@ success| `{"success":True,"msg":"更新合约列表完成","data":""}`| 最新�
 fail| `{"success":False,"msg":"更新合约失败","data":""}`
 
 <span id="order_solve"></span>
-### /order_solve___[[目录]](#目录)
+### /order_solve
+[[回到目录]](#目录)
+
 key|value|remarks
 ---|---|---
 method|GET
@@ -109,7 +117,9 @@ success| `{"success":True,"msg":"成功下单","data":""}`
 fail| `{"success":False,"msg":msg,"data":""}`
 
 <span id="auth_code"></span>
-### /auth_code___[[目录]](#目录)
+### /auth_code
+[[回到目录]](#目录)
+
 key|value|remarks
 ---|---|---
 method|POST
@@ -121,7 +131,9 @@ success| `{"success":True,"msg":"修改成功","data":""}`
 fail| `{"success":False,"msg":"修改失败","data":""}`
 
 <span id="strategy"></span>
-### /strategy___[[目录]](#目录)
+### /strategy
+[[回到目录]](#目录)
+
 key|value|remarks
 ---|---|---
 method|GET
@@ -145,7 +157,9 @@ success| `{"success":True,"msg":"删除××成功","data":""}`
 fail| `{"success":False,"msg":"删除××失败","data":""}`
 
 <span id="check_code"></span>
-### /check_code___[[目录]](#目录)
+### /check_code
+[[回到目录]](#目录)
+
 key|value|remarks
 ---|---|---
 method|POST
@@ -155,7 +169,9 @@ response|
 success| `{"success":True,"msg":"","data":data}`
 
 <span id="run_code"></span>
-### /run_code___[[目录]](#目录)
+### /run_code
+[[回到目录]](#目录)
+
 key|value|remarks
 ---|---|---
 method|POST
@@ -165,7 +181,9 @@ response|
 success| `{"success":True,"msg":"","data":data}`
 
 <span id="code"></span>
-### /code___[[目录]](#目录)
+### /code
+[[回到目录]](#目录)
+
 key|value|remarks
 ---|---|---
 method|GET
@@ -183,7 +201,9 @@ success| `{"success":True,"msg":"添加成功","data":""}`|同时对策略进行
 fail|`{"success":True,"msg":"添加失败","data":""}`
 
 <span id="close_position"></span>
-### /close_position___[[目录]](#目录)
+### /close_position
+[[回到目录]](#目录)
+
 key|value|remarks
 ---|---|---
 method|POST
@@ -198,7 +218,9 @@ success| `{"success":True,"msg":msg,"data":""}`
 fail| `{"success":False,"msg":msg,"data":""}`
 
 <span id="bar"></span>
-### /bar___[[目录]](#目录)
+### /bar
+[[回到目录]](#目录)
+
 key|value|remarks
 ---|---|---
 method|POST
@@ -209,7 +231,9 @@ success| `{"success":True,"msg":"","data":data}`|data->`[[timestamp,open_price,h
 fail| `{"success":False,"msg":msg,"data":""}`|
 
 <span id="config"></span>
-### /config___[[目录]](#目录)
+### /config
+[[回到目录]](#目录)
+
 key|value|remarks
 ---|---|---
 method|GET
@@ -230,7 +254,9 @@ args|
 response|
 success|`{"success":True,"修改成功":"","data":""}`
 
-## 代码概览___[[目录]](#目录)
+## 代码概览
+[[回到目录]](#目录)
+
 基于ctpbee API支持
 - views
 - lib
@@ -253,7 +279,8 @@ success|`{"success":True,"修改成功":"","data":""}`
 ---
 
 <span id="deploy"></span>
-## ~~快速部署~~ (现仅支持单账户)python run.py 即可___[[目录]](#目录)
+## ~~快速部署~~ (现仅支持单账户)python run.py 即可
+[[回到目录]](#目录)
 
 --- 
 根据实际部署情况修改 uwsig.ini
