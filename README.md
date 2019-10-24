@@ -8,25 +8,25 @@ pip install -r requriment.txt
 ### 目录
 - [功能支持](#功能支持)
 - [API](#API)
-  - [/login](#/login)
-  - [/logout](#/logout)
-  - [/market](#/market)
-  - [/order_solve](#/order_solve)
-  - [/auth_code](#/auth_code)
-  - [/strategy](#/strategy)
-  - [/check_code](#/check_code)
-  - [/run_code](#/run_code)
-  - [/code](#/code)
-  - [/close_position](#/close_position)
-  - [/bar](#/bar)
-  - [/config](#/config)
+  - [/login](#login)
+  - [/logout](#logout)
+  - [/market](#market)
+  - [/order_solve](#order_solve)
+  - [/auth_code](#auth_code)
+  - [/strategy](#strategy)
+  - [/check_code](#check_code)
+  - [/run_code](#run_code)
+  - [/code](#code)
+  - [/close_position](#close_position)
+  - [/bar](#bar)
+  - [/config](#config)
 - [代码概览](#代码概览)
 - [快速部署](#deploy)
 - [写在最后](#写在最后)
 
 
 
-## 功能支持
+## 功能支持___[[目录]](#目录)
  - [x] 单账户
  - [x] 行情
  - [x] K线图
@@ -35,10 +35,12 @@ pip install -r requriment.txt
  - [ ] 回测
  ---
 
-## API
+## API___[[目录]](#目录)
 > Response格式规范:  `{'success' : True(bool), 'msg' :  msg(str), 'data' : data(Any)}`
 如未明确给出，请以具体的msg，data为准
-### /login
+
+<span id="login"></span>
+### /login___[[目录]](#目录)
 key|value|remarks
 ---|---|---
 method|POST
@@ -55,8 +57,9 @@ args|
 response|
 success| `{"success":True,"msg":"","data":token}`
 fail| `{"success":False,"msg":msg,"data":""}`
-      
-### /logout
+     
+<span id="logout"></span>
+### /logout___[[目录]](#目录)
 key|value|remarks
 ---|---|---
 method|POST
@@ -66,8 +69,8 @@ response|
 success| `{"success":True,"msg":msg,"data":""}`
 fail| `{"success":False,"msg":msg,"data":""}`
 
-
-### /market
+<span id="market"></span>
+### /market___[[目录]](#目录)
 key|value|remarks
 ---|---|---
 method|POST
@@ -83,7 +86,8 @@ response|
 success| `{"success":True,"msg":"更新合约列表完成","data":""}`| 最新合约列表通过socket推送 on("contract")
 fail| `{"success":False,"msg":"更新合约失败","data":""}`
 
-### /order_solve
+<span id="order_solve"></span>
+### /order_solve___[[目录]](#目录)
 key|value|remarks
 ---|---|---
 method|GET
@@ -104,7 +108,8 @@ response|
 success| `{"success":True,"msg":"成功下单","data":""}`
 fail| `{"success":False,"msg":msg,"data":""}`
 
-### /auth_code
+<span id="auth_code"></span>
+### /auth_code___[[目录]](#目录)
 key|value|remarks
 ---|---|---
 method|POST
@@ -115,7 +120,8 @@ response|
 success| `{"success":True,"msg":"修改成功","data":""}`
 fail| `{"success":False,"msg":"修改失败","data":""}`
 
-### /strategy
+<span id="strategy"></span>
+### /strategy___[[目录]](#目录)
 key|value|remarks
 ---|---|---
 method|GET
@@ -138,7 +144,8 @@ response|
 success| `{"success":True,"msg":"删除××成功","data":""}`
 fail| `{"success":False,"msg":"删除××失败","data":""}`
 
-### /check_code
+<span id="check_code"></span>
+### /check_code___[[目录]](#目录)
 key|value|remarks
 ---|---|---
 method|POST
@@ -147,7 +154,8 @@ args|
 response|
 success| `{"success":True,"msg":"","data":data}`
 
-### /run_code
+<span id="run_code"></span>
+### /run_code___[[目录]](#目录)
 key|value|remarks
 ---|---|---
 method|POST
@@ -156,7 +164,8 @@ args|
 response|
 success| `{"success":True,"msg":"","data":data}`
 
-### /code
+<span id="code"></span>
+### /code___[[目录]](#目录)
 key|value|remarks
 ---|---|---
 method|GET
@@ -173,7 +182,8 @@ response|
 success| `{"success":True,"msg":"添加成功","data":""}`|同时对策略进行ext变量检测
 fail|`{"success":True,"msg":"添加失败","data":""}`
 
-### /close_position
+<span id="close_position"></span>
+### /close_position___[[目录]](#目录)
 key|value|remarks
 ---|---|---
 method|POST
@@ -187,7 +197,8 @@ response|
 success| `{"success":True,"msg":msg,"data":""}`
 fail| `{"success":False,"msg":msg,"data":""}`
 
-### /bar
+<span id="bar"></span>
+### /bar___[[目录]](#目录)
 key|value|remarks
 ---|---|---
 method|POST
@@ -197,8 +208,8 @@ response|
 success| `{"success":True,"msg":"","data":data}`|data->`[[timestamp,open_price,high_price,low_price,close_price,volume],]`
 fail| `{"success":False,"msg":msg,"data":""}`|
 
-
-### /config
+<span id="config"></span>
+### /config___[[目录]](#目录)
 key|value|remarks
 ---|---|---
 method|GET
@@ -219,7 +230,7 @@ args|
 response|
 success|`{"success":True,"修改成功":"","data":""}`
 
-## 代码概览     
+## 代码概览___[[目录]](#目录)
 基于ctpbee API支持
 - views
 - lib
@@ -241,8 +252,8 @@ success|`{"success":True,"修改成功":"","data":""}`
 
 ---
 
-
-## <span id="deploy">~~快速部署~~ (现仅支持单账户)python run.py 即可</span>
+<span id="deploy"></span>
+## ~~快速部署~~ (现仅支持单账户)python run.py 即可___[[目录]](#目录)
 
 --- 
 根据实际部署情况修改 uwsig.ini
