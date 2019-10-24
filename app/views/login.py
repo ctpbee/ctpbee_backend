@@ -9,7 +9,7 @@ from app.auth import Auth, auth_required
 from app.default_settings import false_response, true_response, DefaultSettings, VLog
 from app.ext import io
 from app.global_var import G
-from app.strategy_lib import load_strategy
+from app.lib.strategy_lib import load_strategy
 
 
 @io.on('disconnect')
@@ -50,7 +50,7 @@ class LoginView(MethodView):
                 bee_current_app.td_login_status:
             if userid == bee_current_app.trader.userid and password == bee_current_app.trader.password:
                 token = Auth.authenticate(info)
-                return true_response(data=token, msg='登录成功')
+                return true_response(data=token, msg='欢迎回来')
             return false_response(msg='Refuse!')
 
         else:  # bee_current_app 不不存在
@@ -72,10 +72,10 @@ class LoginView(MethodView):
                     bee_current_app.td_login_status:
                 token = Auth.authenticate(info)
 
-                return true_response(data=token, msg='重新登录成功')
+                return true_response(data=token, msg='登录成功')
             else:
                 del_app(__name__)
-                return false_response(msg="重新登录出现错误")
+                return false_response(msg="登录出现错误")
 
 
 class LogoutView(MethodView):

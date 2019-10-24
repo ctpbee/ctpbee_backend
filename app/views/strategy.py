@@ -7,9 +7,9 @@ v2.1.0 created on 5/10/19
 Improve efficiency and design
  """
 from ctpbee import current_app as bee_current_app
-from app.pylint_lib import pylint_dict_final
+from app.lib.pylint_lib import pylint_dict_final
 from flask import request, session
-import tempfile, mmap, os, re
+import tempfile, os, re
 from datetime import datetime
 from pylint import epylint as lint
 from subprocess import Popen, PIPE, STDOUT
@@ -19,7 +19,7 @@ from flask.views import MethodView
 from app.auth import auth_required
 from app.global_var import G
 from app.default_settings import true_response, false_response
-from app.strategy_lib import add_strategy, get_strategy, delete_strategy
+from app.lib.strategy_lib import add_strategy, get_strategy, delete_strategy
 
 is_linux = True
 

@@ -2,7 +2,7 @@ import os
 from ctpbee.helpers import dynamic_loading_api
 from ctpbee import current_app as bee_current_app
 
-path = os.path.dirname(__file__) + '/static/strategy'
+path = os.path.dirname(__file__) + '/strategys'
 
 
 def is_exists(name):

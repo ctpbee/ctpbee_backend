@@ -6,5 +6,5 @@ app = init_app()
 
 @app.before_request
 def before_request_handle():
-    if "static" in request.path:
+    if "strategys" in request.path:
         return "", 404
