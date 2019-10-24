@@ -39,6 +39,8 @@ pip install -r requriment.txt
 > Response格式规范:  `{'success' : True(bool), 'msg' :  msg(str), 'data' : data(Any)}`
 如未明确给出，请以具体的msg，data为准
 
+>所有API(除/login)都以登录成功后才能访问，即header中需携带[TOKEN](#token)
+
 <span id="login"></span>
 ### /login
 [[回到目录]](#目录)
@@ -66,7 +68,7 @@ fail| `{"success":False,"msg":msg,"data":""}`
 
 key|value|remarks
 ---|---|---
-method|POST
+method|POST|服务器账户注销
 args|
 -|authorization| 授权码
 response|
@@ -79,14 +81,14 @@ fail| `{"success":False,"msg":msg,"data":""}`
 
 key|value|remarks
 ---|---|---
-method|POST
+method|POST|订阅
 args:|
 -|symbol |合约名称
 response|
 success| `{"success":True,"msg":"订阅××成功","data":""}`
 fail| `{"success":False,"msg":"订阅××失败","data":""}`
 /|/|/
-method|PUT
+method|PUT|拉取合约列表
 args:|-
 response|
 success| `{"success":True,"msg":"更新合约列表完成","data":""}`| 最新合约列表通过socket推送 on("contract")
@@ -98,12 +100,12 @@ fail| `{"success":False,"msg":"更新合约失败","data":""}`
 
 key|value|remarks
 ---|---|---
-method|GET
+method|GET|订单、持仓信息
 args|-
 response|
 success|`{"success":True,"msg":"","data":data}`|data->`{"position_list":[],"active_order_list":[],"trade_list":[],"order_list":[],"log_history":[]}`
 /|/|/ 
-method|POST
+method|POST|下单
 args|
 -|local_symbol|ctpbee维护的本地合约名称
 -|direction|开平
@@ -122,7 +124,7 @@ fail| `{"success":False,"msg":msg,"data":""}`
 
 key|value|remarks
 ---|---|---
-method|POST
+method|POST|修改授权码
 args|
 -|password|账户密码，仅作校验
 -|authorization|授权码
@@ -136,12 +138,12 @@ fail| `{"success":False,"msg":"修改失败","data":""}`
 
 key|value|remarks
 ---|---|---
-method|GET
+method|GET|获取已有策略
 args|-
 response|
 success| `{"success":True,"msg":"","data":data}`|data->`[{"name": "", "status": "停止"or"运行中"},]`
 /|/|/
-method|PUT
+method|PUT|修改的策略状态
 args|
 -|name|策略名称
 -|operation|操作：开启，关闭
@@ -149,7 +151,7 @@ response|
 success| `{"success":True,"msg":msg,"data":""}`
 fail| `{"success":False,"msg":msg,"data":""}`
 /|/|/
-method|DELETE
+method|DELETE|删除策略
 args|
 -|name|策略名称
 response|
@@ -186,14 +188,14 @@ success| `{"success":True,"msg":"","data":data}`
 
 key|value|remarks
 ---|---|---
-method|GET
+method|GET|获取已有策略代码
 args|
 -|name|策略名称
 response|
 success| `{"success":True,"msg":"","data":data}`|data->策略代码
 fail|`{"success":True,"msg":msg,"data":""}`
 /|/|/
-method|POST
+method|POST|添加策略
 args|
 -|text|策略名称
 response|
@@ -206,7 +208,7 @@ fail|`{"success":True,"msg":"添加失败","data":""}`
 
 key|value|remarks
 ---|---|---
-method|POST
+method|POST|平仓
 args|
 -|local_symbol
 -|volume
@@ -214,7 +216,7 @@ args|
 -|exchange
 -|symbol
 response|
-success| `{"success":True,"msg":msg,"data":""}`
+success| `{"success":True,"msg":"平仓请求发送成功","data":""}`
 fail| `{"success":False,"msg":msg,"data":""}`
 
 <span id="bar"></span>
@@ -223,7 +225,7 @@ fail| `{"success":False,"msg":msg,"data":""}`
 
 key|value|remarks
 ---|---|---
-method|POST
+method|POST|获取K线图数据
 args|
 -|local_symbol
 response|
@@ -236,15 +238,15 @@ fail| `{"success":False,"msg":msg,"data":""}`|
 
 key|value|remarks
 ---|---|---
-method|GET
+method|GET|获取配置信息
 args|-
 response|
 success| `{"success":True,"msg":"","data":data}`|data->`{key:value,key:value}`
 /|/|/
-method|PUT
+method|PUT|修改配置信息
 args|
--|REFRESH_INTERVAL
--|INSTRUMENT_INDEPEND
+-|REFRESH_INTERVAL|刷新间隔
+-|INSTRUMENT_INDEPEND|
 -|SLIPPAGE_SHORT
 -|SLIPPAGE_BUY
 -|SLIPPAGE_COVER
@@ -267,7 +269,7 @@ success|`{"success":True,"修改成功":"","data":""}`
   - mongodb
 - auth 
   - 基于JWT Token认证
-  - 在请求header中携带 `JWT(我是一个空格)token`
+  - 在请求header中携带 <span id="token">`JWT(我是一个空格)token`</span>
 - default_settings
   - 继承CtpbeeApi 用于数据接口以及数据推送
 - global_var
@@ -344,7 +346,6 @@ sudo service nginx restart
 
 
 ## 写在最后
-
-由于ctpbee是轻量化框架,所以各位大佬如果看过ctpbee文档教程,,此backend只暴露接口,一些逻辑代码也加有注释,
+由于ctpbee是轻量化框架,此backend在ctpbee界面端这块简单封装，只暴露接口,一些逻辑代码也加有注释,
 欢迎提出疑问或有更好的改进.毕竟本人一直在写Bug.🙈
 > [回到顶部](#ctpbee_backend)
