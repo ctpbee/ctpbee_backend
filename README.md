@@ -1,4 +1,4 @@
-# <span id="top">ctpbee_backend</span>
+# ctpbee_backend
 ---
 > 基于ctpbee界面端的后台服务
 ```
@@ -8,8 +8,20 @@ pip install -r requriment.txt
 ### 目录
 - [功能支持](#功能支持)
 - [API](#API)
+  - [/login](#/login)
+  - [/logout](#/logout)
+  - [/market](#/market)
+  - [/order_solve](#/order_solve)
+  - [/auth_code](#/auth_code)
+  - [/strategy](#/strategy)
+  - [/check_code](#/check_code)
+  - [/run_code](#/run_code)
+  - [/code](#/code)
+  - [/close_position](#/close_position)
+  - [/bar](#/bar)
+  - [/config](#/config)
 - [代码概览](#代码概览)
-- [快速部署](#快速部署)
+- [快速部署](#deploy)
 - [写在最后](#写在最后)
 
 
@@ -64,7 +76,7 @@ args:|
 response|
 success| `{"success":True,"msg":"订阅××成功","data":""}`
 fail| `{"success":False,"msg":"订阅××失败","data":""}`
-|
+/|/|/
 method|PUT
 args:|-
 response|
@@ -78,7 +90,7 @@ method|GET
 args|-
 response|
 success|`{"success":True,"msg":"","data":data}`|data->`{"position_list":[],"active_order_list":[],"trade_list":[],"order_list":[],"log_history":[]}`
-| 
+/|/|/ 
 method|POST
 args|
 -|local_symbol|ctpbee维护的本地合约名称
@@ -110,7 +122,7 @@ method|GET
 args|-
 response|
 success| `{"success":True,"msg":"","data":data}`|data->`[{"name": "", "status": "停止"or"运行中"},]`
-|
+/|/|/
 method|PUT
 args|
 -|name|策略名称
@@ -118,7 +130,7 @@ args|
 response|
 success| `{"success":True,"msg":msg,"data":""}`
 fail| `{"success":False,"msg":msg,"data":""}`
-|
+/|/|/
 method|DELETE
 args|
 -|name|策略名称
@@ -153,7 +165,7 @@ args|
 response|
 success| `{"success":True,"msg":"","data":data}`|data->策略代码
 fail|`{"success":True,"msg":msg,"data":""}`
-|
+/|/|/
 method|POST
 args|
 -|text|策略名称
@@ -193,7 +205,7 @@ method|GET
 args|-
 response|
 success| `{"success":True,"msg":"","data":data}`|data->`{key:value}`
-|
+/|/|/
 method|PUT
 args|
 -|REFRESH_INTERVAL
@@ -230,7 +242,7 @@ success|`{"success":True,"修改成功":"","data":data}`
 ---
 
 
-## ~~快速部署~~ (现仅支持单账户)python run.py 即可
+## <span id="deploy">~~快速部署~~ (现仅支持单账户)python run.py 即可</span>
 
 --- 
 根据实际部署情况修改 uwsig.ini
@@ -293,8 +305,8 @@ sudo service nginx restart
 ---
 
 
-## 写在最后[目录](#目录)
+## 写在最后
 
 由于ctpbee是轻量化框架,所以各位大佬如果看过ctpbee文档教程,,此backend只暴露接口,一些逻辑代码也加有注释,
 欢迎提出疑问或有更好的改进.毕竟本人一直在写Bug.🙈
-> [回到顶部](#top)
+> [回到顶部](#ctpbee_backend)
