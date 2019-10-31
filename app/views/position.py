@@ -32,7 +32,6 @@ class PositionView(MethodView):
         except KeyError:
             return false_response(msg='参数含空')
         tick = TickData(symbol=symbol, exchange=self.exchange_map[exchange])
-        print(local_symbol)
         price = bee_current_app.recorder.get_tick(local_symbol).last_price
         try:
             if direction == "long":

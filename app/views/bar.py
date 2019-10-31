@@ -12,6 +12,7 @@ class BarView(MethodView):
     def post(self):
         try:
             symbol = request.values['local_symbol']
+            print(symbol)
         except KeyError:
             return false_response(msg='symbol 为空')
         timeArray = datetime.now() - timedelta(days=G.g['BAR_TIME'])

@@ -1,11 +1,3 @@
-"""Created originally by Ethan Chiu 10/25/16
-v2.0.0 created on 8/4/18
-Complete redesign for efficiency and scalability
-Uses Python 3 now
-
-v2.1.0 created on 5/10/19
-Improve efficiency and design
- """
 from ctpbee import current_app as bee_current_app
 from app.lib.pylint_lib import pylint_dict_final
 from flask import request, session

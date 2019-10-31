@@ -14,7 +14,10 @@ from app.lib.strategy_lib import load_strategy
 
 @io.on('disconnect')
 def disconnect_handle():
-    leave_room('vip')
+    try:
+        leave_room('vip')
+    except Exception:
+        pass
 
 
 @io.on('identify')
@@ -38,7 +41,6 @@ class LoginView(MethodView):
         :return:
         """
         info = dict(request.values)
-        print(info)
         authorization = info.pop('authorization', None)
         if not authorization or not G.check_authorization(authorization):
             return false_response(msg='授权码错误')
@@ -89,6 +91,7 @@ class LogoutView(MethodView):
             return true_response(msg='服务器已安全退出')
         else:
             return false_response(msg='授权码错误')
+
 
 class AuthCodeView(MethodView):
     @auth_required

@@ -269,7 +269,7 @@ success|`{"success":True,"修改成功":"","data":""}`
   - mongodb
 - auth 
   - 基于JWT Token认证
-  - 在请求header中携带 <span id="token">`JWT(我是一个空格)token`</span>
+  - 在请求header中携带 TOKEN,格式：<span id="token">`JWT(我是一个空格)token`</span>
 - default_settings
   - 继承CtpbeeApi 用于数据接口以及数据推送
 - global_var

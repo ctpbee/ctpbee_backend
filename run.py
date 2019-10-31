@@ -25,6 +25,7 @@ def get_netcard():
 interface, local_ip = get_netcard()[0]
 
 if __name__ == '__main__':
-    io.run(app, host=local_ip)
+    print(local_ip)
+    io.run(app, host="0.0.0.0")
     # io.run(app, host=local_ip)
     # webbrowser.open("http://127.0.0.1:5000/login")
