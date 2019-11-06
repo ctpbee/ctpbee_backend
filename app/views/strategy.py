@@ -41,24 +41,16 @@ def evaluate_pylint(text):
     """
     # Open temp file for specific session.
     # IF it doesn't exist (aka the key doesn't exist), create one
-    se = G.session[session['token']]
-    try:
-        filename = se["file_name"]
-        f = open(filename, "w")
+    with tempfile.NamedTemporaryFile(delete=False) as temp:
+        file_name = temp.name
         for t in text:
-            f.write(t)
-        f.flush()
-    except Exception as e:
-        with tempfile.NamedTemporaryFile(delete=False) as temp:
-            se["file_name"] = temp.name
-            for t in text:
-                temp.write(t.encode("utf-8"))
-            temp.flush()
+            temp.write(t.encode("utf-8"))
+        temp.flush()
 
     try:
         ARGS = " -r n --disable=R,C"
         (pylint_stdout, pylint_stderr) = lint.py_run(
-            se["file_name"] + ARGS, return_std=True)
+            file_name + ARGS, return_std=True)
     except Exception as e:
         raise Exception(e)
 
@@ -196,26 +188,16 @@ class CheckCode(MethodView):
             https://github.com/PyCQA/pylint/blob/master/pylint/lint.py
         """
         # Session to handle multiple users at one time and to get textarea from AJAX call
-        se = G.session[session['token']]
-
-        se["code"] = request.form['text']
-        text = se["code"]
+        try:
+            text = request.values['text']
+        except KeyError:
+            return false_response(msg='参数为空')
         output = evaluate_pylint(text)
         print(output)
         # MANAGER.astroid_cache.clear()
         return true_response(data=output)
 
 
-def slow():
-    se = G.session[session['token']]
-    se["count"] += 1
-    time = datetime.now() - se["time_now"]
-    if float(se["count"]) / float(time.total_seconds()) > 5:
-        return True
-    return False
-
-
-# Run python in secure system
 class RunCode(MethodView):
     """Run python 3 code
         :return: JSON object of python 3 output
@@ -227,28 +209,17 @@ class RunCode(MethodView):
     # Don't run too many times
     @auth_required
     def post(self):
-        if slow():
-            return false_response(msg=
-                                  "Running code too much within a short time period. "
-                                  "Please wait a few seconds Run .")
-        se = G.session[session['token']]
-        se["time_now"] = datetime.now()
-        se["code"] = request.form['text']
-        text = se['code']
         try:
-            filename = se["file_name"]
-            f = open(filename, "w")
+            text = request.values['text']
+        except KeyError:
+            return false_response(msg='参数为空')
+        with tempfile.NamedTemporaryFile(delete=False) as temp:
+            file_name = temp.name
             for t in text:
-                f.write(t)
-            f.flush()
-        except Exception as e:
-            with tempfile.NamedTemporaryFile(delete=False) as temp:
-                se["file_name"] = temp.name
-                for t in text:
-                    temp.write(t.encode("utf-8"))
-                temp.flush()
+                temp.write(t.encode("utf-8"))
+            temp.flush()
         output = None
-        cmd = 'python ' + se["file_name"]
+        cmd = 'python ' + file_name
         p = Popen(cmd, shell=True, stdin=PIPE, stdout=PIPE,
                   stderr=STDOUT, close_fds=True)
         output = p.stdout.read()
@@ -259,8 +230,11 @@ class RunCode(MethodView):
 class CodeManage(MethodView):
     @auth_required
     def get(self):
-        name = request.values.get('name')
-        if name and name != 'default_settings':
+        try:
+            name = request.values['name']
+        except KeyError:
+            return false_response(msg='参数为空')
+        if name != 'default_settings':
             text = get_strategy(name)
             if text:
                 return true_response(data=text)
@@ -271,9 +245,10 @@ class CodeManage(MethodView):
     @auth_required
     def post(self):
         pattern = r"ext\s*=\s*\w*[(][\"\'](.*)[\"\'][)]"
-        se = G.session[session['token']]
-
-        text = request.values.get('text')
+        try:
+            text = request.values['text']
+        except KeyError:
+            return false_response(msg='参数为空')
         name = re.findall(pattern, text)  # 检测 name ,ext
         if not name or not text:
             return false_response(msg='name,text为空 or 未定义ext变量 ')
@@ -288,7 +263,6 @@ class CodeManage(MethodView):
 class StrategyView(MethodView):
     @auth_required
     def get(self):
-        G.session = dict(token=session['token'], data=dict(count=0, time_now=datetime.now()))  # slow
         result = []
         for k, v in bee_current_app.extensions.items():
             temp = {'name': k, 'status': "停止" if v.frozen else "运行中"}
@@ -297,13 +271,18 @@ class StrategyView(MethodView):
 
     @auth_required
     def put(self):
-        operation = request.values.get('operation')
-        name = request.values.get('name')
+        try:
+            operation = request.values['operation']
+            name = request.values['name']
+        except KeyError:
+            return false_response(msg='参数为空')
         if name in bee_current_app.extensions:
             if operation == "开启":
                 res = bee_current_app.enable_extension(name)
+                G.frozen_strategy.remove(name + '.py')
             elif operation == "关闭":
                 res = bee_current_app.suspend_extension(name)
+                G.frozen_strategy.append(name + '.py')
             else:
                 res = 'unknown'
             res = '成功' if res is True else '失败'
@@ -314,5 +293,6 @@ class StrategyView(MethodView):
     def delete(self):
         name = request.values.get('name')
         if delete_strategy(name):
+            G.frozen_strategy.append(name + '.py')
             return true_response(msg=f'删除{name}成功')
         return false_response(msg=f'删除{name}失败')

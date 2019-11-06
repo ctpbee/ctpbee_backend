@@ -2,7 +2,7 @@ import datetime
 from functools import wraps
 import time
 import jwt
-from flask import request, session
+from flask import request
 
 from app.setting import JWT_SECRET_KEY
 from colour_printing.default import log
@@ -89,7 +89,6 @@ class Auth:
         }
 
         G.current_user = user_info  # current_user
-        G.session = dict(token=token, data=token_info)  # Strategy
         return token
 
     @staticmethod
@@ -118,7 +117,6 @@ class Auth:
                         result = false_return(msg='token error')
                     else:
                         if user['login_time'] == payload['data']['login_time']:
-                            session['token'] = auth_token  # Strategy
                             result = true_return(msg='请求成功')
                         else:
                             log.error('Token已过期')

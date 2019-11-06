@@ -1,13 +1,18 @@
 import os
 
 
-class GVar:
+class GlobalVar:
     g = None
-    authorization_path = os.path.dirname(__file__) + '/static/authorization.txt'
+    authorization_path = os.path.dirname(__file__) + '/lib/authorization.txt'
 
     @classmethod
     def init_app(cls, app):
         cls.g = app.config
+
+    @property
+    def frozen_strategy(self):
+        """记录已停止的策略，用于重新登录后的区别加载"""
+        return self.g.setdefault("frozen_strategy", [])
 
     @property
     def mongo_token(self):
@@ -72,4 +77,4 @@ class GVar:
         return self.g.setdefault('LOG_HISTORY', [])
 
 
-G = GVar()
+G = GlobalVar()

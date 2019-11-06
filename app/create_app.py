@@ -1,6 +1,6 @@
 # this is the web client in here  you can use it to trade or read market fastly
 from flask import Flask
-from .global_var import GVar, G
+from .global_var import GlobalVar, G
 from .ext import io
 from app.views import LoginView, MarketView, OpenOrderView, StrategyView, AuthCodeView, LogoutView, PositionView, \
     RunCode, CheckCode, CodeManage, BarView, ConfigView
@@ -23,7 +23,7 @@ def init_app():
     app.add_url_rule("/close_position", view_func=PositionView.as_view("close_position"), methods=['POST'])
     app.add_url_rule("/bar", view_func=BarView.as_view("bar"), methods=['POST'])
     app.add_url_rule("/config", view_func=ConfigView.as_view("config"), methods=['GET', 'PUT'])
-    GVar.init_app(app)
+    GlobalVar.init_app(app)
     G.load_authorization()
     io.init_app(app)
 

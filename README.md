@@ -245,14 +245,14 @@ success| `{"success":True,"msg":"","data":data}`|data->`{key:value,key:value}`
 /|/|/
 method|PUT|修改配置信息
 args|
--|REFRESH_INTERVAL|刷新间隔
--|INSTRUMENT_INDEPEND|
--|SLIPPAGE_SHORT
--|SLIPPAGE_BUY
--|SLIPPAGE_COVER
--|SLIPPAGE_SELL
--|CLOSE_PATTERN
--|SHARED_FUNC
+-|REFRESH_INTERVAL|定时刷新秒数
+-|INSTRUMENT_INDEPEND|是否开启独立行情
+-|SLIPPAGE_SHORT|卖空滑点设置
+-|SLIPPAGE_BUY|买多滑点设置
+-|SLIPPAGE_COVER|平多头设置的滑点， 支持正负数
+-|SLIPPAGE_SELL|平空头滑点设置
+-|CLOSE_PATTERN|面对支持平今的交易所，指定优先平今或者平昨 ---> today: 平今, yesterday: 平昨
+-|SHARED_FUNC|分时图数据
 response|
 success|`{"success":True,"修改成功":"","data":""}`
 

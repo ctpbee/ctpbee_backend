@@ -1,6 +1,7 @@
 import os
 from ctpbee.helpers import dynamic_loading_api
 from ctpbee import current_app as bee_current_app
+from app.global_var import G
 
 path = os.path.dirname(__file__) + '/strategys'
 
@@ -43,6 +44,7 @@ def load_strategy(bee_app):
     files = os.listdir(path)
     for file in files:  # 遍历文件夹
         if not os.path.isdir(file) and file.endswith('.py'):  # 判断是否是文件夹，不是文件夹才打开
+            if file in G.frozen_strategy: continue
             with open(f"{path}/{file}", 'r') as f:
                 try:
                     ext = dynamic_loading_api(f)
